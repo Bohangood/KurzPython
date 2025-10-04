@@ -5,26 +5,26 @@ FILE_NAME = "tasks.json"
 
 
 def load_tasks():
-    """Завантажити задачі з файлу, або повернути пустий словник."""
+    #Завантажити задачі з файлу, або повернути пустий словник.
     if os.path.exists(FILE_NAME):
         with open(FILE_NAME, "r", encoding="utf-8") as f:
             return json.load(f)
     return {}
 
 def save_tasks(tasks):
-    """Зберегти задачі у файл."""
+    #Зберегти задачі у файл.
     with open(FILE_NAME, "w", encoding="utf-8") as f:
         json.dump(tasks, f, indent=4, ensure_ascii=False)
 
 
 def generate_id(tasks):
-    """Зробити новий id. Він завжди на 1 більший за найбільший існуючий."""
+    #Зробити новий id. Він завжди на 1 більший за найбільший існуючий
     if tasks:
         return str(int(max(tasks.keys(), key=int)) + 1)
     return "1"
 
 def print_task(task_id, task):
-    """Вивести одну задачу."""
+    #Вивести одну задачу.
     print(f"ID: {task_id} | Назва: {task['title']} | Опис: {task['desc']} | "
           f"Пріоритет: {task['priority']} | Статус: {task['status']}")
 
@@ -32,8 +32,8 @@ def print_task(task_id, task):
 def create_task(tasks):
     title = input("Введіть назву: ")
     desc = input("Введіть опис: ")
-    priority = input("Пріоритет (low/medium/high): ")
-    status = input("Статус (new/in progress/done): ")
+    priority = input("Пріоритет (низ/сер/вис): ")
+    status = input("Статус (новий/в проц/зав.): ")
     task_id = generate_id(tasks)
     tasks[task_id] = {"title": title, "desc": desc, "priority": priority, "status": status}
     save_tasks(tasks)
